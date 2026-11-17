@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------------------------------------
+   Theme channel variables. The `.dark` class on <html> flips every os-* colour.
+--------------------------------------------------------------------------- */
+:root {
+  --os-bg: 245 247 251;
+  --os-sidebar: 255 255 255;
+  --os-card: 255 255 255;
+  --os-border: 229 231 235;
+  --os-text: 17 24 39;
+  --os-muted: 100 116 139;
+  --os-accent: 109 92 231;
+  --os-success: 22 163 74;
+  --os-warning: 217 119 6;
+  --os-danger: 220 38 38;
+  --os-info: 37 99 235;
+}
+
+.dark {
+  --os-bg: 11 15 25;
+  --os-sidebar: 17 24 39;
+  --os-card: 21 28 44;
+  --os-border: 39 52 73;
+  --os-text: 248 250 252;
+  --os-muted: 148 163 184;
+  --os-accent: 139 92 246;
+  --os-success: 34 197 94;
+  --os-warning: 245 158 11;
+  --os-danger: 239 68 68;
+  --os-info: 59 130 246;
+}
+
+@layer base {
+  * {
+    border-color: rgb(var(--os-border));
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-os-bg text-os-text font-sans antialiased;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    margin: 0;
+  }
+  /* Refined scrollbars */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--os-border));
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--os-muted) / 0.6);
+    background-clip: padding-box;
+  }
+}
+
+@layer components {
+  .os-card {
+    @apply bg-os-card border border-os-border rounded-xl shadow-card;
+  }
+  .os-input {
+    @apply w-full bg-os-bg border border-os-border rounded-lg px-3 py-2 text-sm text-os-text placeholder:text-os-muted/60 outline-none transition focus:border-os-accent focus:ring-2 focus:ring-os-accent/20;
+  }
+  .os-label {
+    @apply block text-xs font-medium text-os-muted mb-1.5;
+  }
+  .os-btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg text-sm font-medium transition active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none whitespace-nowrap;
+  }
+  .os-btn-primary {
+    @apply os-btn bg-os-accent text-white px-4 py-2 hover:bg-os-accent/90 shadow-glow;
+  }
+  .os-btn-secondary {
+    @apply os-btn bg-os-card border border-os-border text-os-text px-4 py-2 hover:border-os-accent/50 hover:text-os-accent;
+  }
+  .os-btn-ghost {
+    @apply os-btn text-os-muted px-3 py-2 hover:bg-os-bg hover:text-os-text;
+  }
+  .os-btn-danger {
+    @apply os-btn bg-os-danger/10 text-os-danger border border-os-danger/30 px-4 py-2 hover:bg-os-danger/20;
+  }
+  .os-chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium border;
+  }
+}
+
+/* Recharts tooltip theming respects the page background */
+.recharts-default-tooltip {
+  background: rgb(var(--os-card)) !important;
+  border: 1px solid rgb(var(--os-border)) !important;
+  border-radius: 8px !important;
+  color: rgb(var(--os-text)) !important;
+}
+.recharts-tooltip-label,
+.recharts-tooltip-item {
+  color: rgb(var(--os-text)) !important;
+}
+.recharts-cartesian-axis-tick text {
+  fill: rgb(var(--os-muted)) !important;
+}
+.recharts-cartesian-grid line {
+  stroke: rgb(var(--os-border)) !important;
+}
